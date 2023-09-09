@@ -16,25 +16,53 @@ public class Kaprekar {
     
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Este programa encuentra la constante de Kaprekar (6174).");
-        System.out.println("Ingrese un número entre 0 y 9999: ");
-        String input = scan.nextLine();
-        
-        try {
-            int numero = Integer.parseInt(input);
-
-            // Verifica si el número está en el rango válido
-            if (numero >= 0 && numero <= 9999) {
-                System.out.println("Número válido ingresado: " + numero);
-            } else {
-                System.out.println("Número fuera de rango. Debe estar entre 0 y 9999.");
+        String input= "";
+        do{
+            System.out.println("Este programa encuentra la constante de Kaprekar (6174).");
+            System.out.println("Ingrese un número entre 0 y 9999 o EXIT para salir: ");
+            input = scan.nextLine();
+            if("EXIT".equals(input)){
+                System.exit(0);
             }
-        } catch (NumberFormatException e) {
-            System.out.println("Entrada no válida. Debe ser un número entero.");
-        }
+            
+            try {
+                int numero = Integer.parseInt(input);
 
+                if ((numero >= 1 && numero <= 9998) &&
+                   (!tieneDosDigitosDiferentes(numero))){
+                    scan.close();
+                    KaprekarOp.KaprekarOP(numero);
+                } else {
+                    throw new InvalidNumberException();
+                }
+            }catch (InvalidNumberException e){
+                System.out.println("Entrada no válida");
+            }catch(NumberFormatException e) {
+                System.out.println("Entrada no válida. Debe ser un número entero.");
+            }
+        }while("EXIT".equals(input));
         
-        scan.close();
+    }
+    
+    
+    private static boolean tieneDosDigitosDiferentes(int numero) {
+        int[] digitos = new int[10];
+        while (numero > 0) {
+            int digito = numero % 10;
+            digitos[digito]++;
+            if (digitos[digito] > 1) {
+                return true;
+            }
+            numero /= 10;
+        }
+        return false;
+    }
+    
+    public static class InvalidNumberException extends Exception {
+
+        public InvalidNumberException() {
+            super("Invalid Format");
+        }
     }
     
 }
