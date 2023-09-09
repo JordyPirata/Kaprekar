@@ -16,48 +16,23 @@ public class Kaprekar {
     
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        String input= "";
+        String input;
         
         System.out.println("Este programa encuentra la constante de Kaprekar (6174).");
         System.out.println("Ingrese un número entre 0 y 9999: ");
         input = scan.nextLine();
+        int num;
         
-        try {
-            int numero = Integer.parseInt(input);
-
-            if ((numero >= 1 && numero <= 9998) &&
-               (!tieneDosDigitosDiferentes(numero))){
-                scan.close();
-                KaprekarOp.KaprekarOP(numero);
-            } else {
-                throw new InvalidNumberException();
+        try{
+            if(KaprekarOp.KaprekarValitation(input)){
+                num = Integer.parseInt(input);
+                KaprekarOp.KaprekarOP(num);
+            }else{
+                throw new NumberFormatException("Entrada no válida");
             }
-        }catch (InvalidNumberException e){
-            System.out.println("Entrada no válida");
-        }catch(NumberFormatException e) {
-            System.out.println("Entrada no válida. Debe ser un número entero.");
-        }   
-    }
-    
-    
-    private static boolean tieneDosDigitosDiferentes(int numero) {
-        int[] digitos = new int[10];
-        while (numero > 0) {
-            int digito = numero % 10;
-            digitos[digito]++;
-            if (digitos[digito] > 1) {
-                return true;
-            }
-            numero /= 10;
+        }catch(NumberFormatException e){
+            System.out.println(e.getMessage());        
         }
-        return false;
+        scan.close();
     }
-    
-    public static class InvalidNumberException extends Exception {
-
-        public InvalidNumberException() {
-            super("Invalid Format");
-        }
-    }
-    
 }

@@ -37,4 +37,14 @@ public class KaprekarOp{
         // Llamada recursiva con el siguiente número
         KaprekarOP(siguienteNumero);
     }
+    
+    public static boolean KaprekarValitation(String input){
+        
+        int numero = Integer.parseInt(input);
+        return ((numero > 0 && numero < 9999) && (validationNumber(numero)));
+    }
+    
+    private static boolean validationNumber(int numero) {
+        return numero % 1111 != 0;
+    }
 }
