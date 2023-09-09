@@ -17,31 +17,26 @@ public class Kaprekar {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         String input= "";
-        do{
-            System.out.println("Este programa encuentra la constante de Kaprekar (6174).");
-            System.out.println("Ingrese un número entre 0 y 9999 o EXIT para salir: ");
-            input = scan.nextLine();
-            if("EXIT".equals(input)){
-                System.exit(0);
-            }
-            
-            try {
-                int numero = Integer.parseInt(input);
-
-                if ((numero >= 1 && numero <= 9998) &&
-                   (!tieneDosDigitosDiferentes(numero))){
-                    scan.close();
-                    KaprekarOp.KaprekarOP(numero);
-                } else {
-                    throw new InvalidNumberException();
-                }
-            }catch (InvalidNumberException e){
-                System.out.println("Entrada no válida");
-            }catch(NumberFormatException e) {
-                System.out.println("Entrada no válida. Debe ser un número entero.");
-            }
-        }while("EXIT".equals(input));
         
+        System.out.println("Este programa encuentra la constante de Kaprekar (6174).");
+        System.out.println("Ingrese un número entre 0 y 9999: ");
+        input = scan.nextLine();
+        
+        try {
+            int numero = Integer.parseInt(input);
+
+            if ((numero >= 1 && numero <= 9998) &&
+               (!tieneDosDigitosDiferentes(numero))){
+                scan.close();
+                KaprekarOp.KaprekarOP(numero);
+            } else {
+                throw new InvalidNumberException();
+            }
+        }catch (InvalidNumberException e){
+            System.out.println("Entrada no válida");
+        }catch(NumberFormatException e) {
+            System.out.println("Entrada no válida. Debe ser un número entero.");
+        }   
     }
     
     
