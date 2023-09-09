@@ -17,7 +17,7 @@ bin/
 
 ### NetBeans ###
 /nbproject/private/
-build/
+/build/
 /dist/
 /nbdist/
 /.nb-gradle/
